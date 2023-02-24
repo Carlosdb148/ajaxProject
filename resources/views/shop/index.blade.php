@@ -1,4 +1,9 @@
 @extends('base')
+
+@section('scripts')
+<script type="text/javascript" src="{{ url('assets/js/ajax.js') }}?{{rand(2, 20)}}"></script>
+@endsection
+
 @section('modalContent')
 
         <!-- ****** Quick View Modal Area Start ****** -->
@@ -94,7 +99,7 @@
                         <div class="shop_sidebar_area">
                             <form action="{{ $url ?? url('shop') }}">
                                 <div class="input-group">
-                                    <input value="{{$search ?? ''}}" type="text" name="q" value="{{ $q ?? '' }}" class="form-control" >
+                                    <input value="{{$search ?? ''}}" type="text" name="q" id="q" value="{{ $q ?? '' }}" class="form-control" >
                                     <input type="hidden" name="orderby" value="{{ $orderby ?? '' }}">
                                     <input type="hidden" name="ordertype" value="{{ $ordertype ?? '' }}">
                                     <input type="hidden" name="ordercategory" value="{{ $ordercategory ?? '' }}">
@@ -114,15 +119,15 @@
                                         <ul id="menu-content2" class="menu-content collapse out">
                                             <!-- Single Item -->
                                             <li >
-                                                <a href="{{ $order[$orderby][$ordertype]['women'] }}">Woman wear</a>
+                                                <a href="#" class="category" data-attribute="women">Woman wear</a>
                                             </li>
                                             <!-- Single Item -->
                                             <li >
-                                                <a href="{{ $order[$orderby][$ordertype]['men'] }}">Man Wear</a>
+                                                <a href="#" class="category" data-attribute="men">Man Wear</a>
                                             </li>
                                             <!-- Single Item -->
                                             <li>
-                                                <a href="{{ $order[$orderby][$ordertype]['child'] }}">Children</a>
+                                                <a href="#" class="category" data-attribute="child">Children</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -136,11 +141,11 @@
                                         <ul id="menu-content2" class="menu-content collapse out">
                                             <!-- Single Item -->
                                             <li >
-                                                <a href="{{ $order['price']['desc'][$ordercategory] }}">Expensive to Cheap</a>
+                                                <a href="#" class="sorting" data-type="shops.price" data-sort="desc">Expensive to Cheap</a>
                                             </li>
                                             <!-- Single Item -->
                                             <li >
-                                                <a href="{{ $order['price']['asc'][$ordercategory] }}">Cheap to Expensive</a>
+                                                <a href="#" class="sorting" data-type="shops.price" data-sort="asc">Cheap to Expensive</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -168,45 +173,13 @@
 
                     <div class="col-12 col-md-8 col-lg-9">
                         <div class="shop_grid_product_area">
-                            <div class="row">
-                                @foreach($shops as $shop)
-                                <!-- Single gallery Item -->
-                                <div class="col-12 col-sm-6 col-lg-4 single_gallery_item wow fadeInUpBig" data-wow-delay="0.2s">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <img src="data:image/jpeg;base64,{{ $shop->thumbnail }}" alt="">
-                                        <div class="product-quicview">
-                                            <a href="{{ url('shop/'. $shop->id) }}" ><i class="ti-plus"></i></a>
-                                        </div>
-                                    </div>
-                                    <!-- Product Description -->
-                                    <div class="product-description">
-                                        <h4 class="product-price">{{ $shop->price }}€</h4>
-                                        <p>{{ $shop->name }}</p>
-                                        <!-- Add to Cart -->
-                                        <!--<a href="#" class="add-to-cart-btn">ADD TO CART</a>-->
-                                        @if(Auth::user())
-                                            @if(Auth::user()->email == 'cadibe148@gmail.com')
-                                                <a href="{{ url('shop/' . $shop->id . '/edit') }}" class="add-to-cart-btn mt-3">EDIT</a>
-                                                <a href="javascript: void(0);"
-        			                                        class = "deleteRow add-to-cart-btn mt-3"
-        			                                        data-name="{{ $shop->name }}"
-        			                                        data-url="{{ url('shop/' . $shop->id ) }}"
-        			                                        data-toggle="modal"
-        			                                        data-target="#modalDelete"
-        			                                        style="text-decoration:none; "><i class="fa fa-reply" aria-hidden="true"></i> DELETE</a>
-			                                 @endif
-			                             @endif
-			                             
-                                    </div>
-                                </div>
-                                @endforeach
+                            <div class="row" id="shopAjaxBody">
+                                
                             </div>
                         </div>
-                        {{ $shops->onEachSide(2)->links() }}
-
-                        
-
+                        <nav>
+                            <ul id="pagination" class="pagination"></ul>
+                        </nav>
                     </div>
                 </div>
             </div>

@@ -13,7 +13,7 @@ class Shop extends Model
     
     protected $fillable = ['name', 'price', 'category', 'description', 'thumbnail'];
     
-    function cart() {
-        return $this->belongsTo('App\Models\Cart', 'idcart');
+    function carts(){
+        return $this->hasMany('App\Models\Cart', 'idshops');
     }
 }

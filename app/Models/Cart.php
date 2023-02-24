@@ -9,8 +9,12 @@ class Cart extends Model
 {
     use HasFactory;
     
+    protected $table = "cart";
     
-    function shops(){
-        return $this->hasMany('App\Models\Shop', 'idcart');
+    protected $fillable = ['idshops', 'ammount'];
+    
+    
+    function shops() {
+        return $this->belongsTo('App\Models\Shop', 'idshops');
     }
 }

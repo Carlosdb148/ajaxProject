@@ -21,8 +21,14 @@ Route::get('logout', [App\Http\Controllers\HomeController::class, 'logout'])->na
 
 
 Route::resource('shop', App\Http\Controllers\ShopController::class);
-Route::get('/', [App\Http\Controllers\ShopController::class, 'index'])->name('shop.index');
+Route::get('/', [App\Http\Controllers\ShopController::class, 'index'])->name('shop.index2');
+Route::post('fetchdata', [App\Http\Controllers\ShopController::class, 'fetchData'])->name('shop.fetchData');
+// Route::post('search', [App\Http\Controllers\ShopController::class, 'search'])->name('shop.search');
 
 
-Route::post('chart', [App\Http\Controllers\ShopController::class, 'chart'])->name('chart');
-Route::get('viewChart', [App\Http\Controllers\ShopController::class, 'viewChart'])->name('viewChart');
+Route::resource('cart', App\Http\Controllers\CartController::class);
+
+Route::post('pago', [App\Http\Controllers\PagoController::class, 'store']);
+
+Route::get('csrf', [App\Http\Controllers\PagoController::class, 'getCsrf']);
+

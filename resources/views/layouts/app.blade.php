@@ -112,7 +112,7 @@
                                 <div class="header-cart-menu d-flex align-items-center ml-auto">
                                     <!-- Cart Area -->
                                     <div class="cart">
-                                        <a href="{{ url('viewChart') }}" ><i class="ti-bag"></i></a>
+                                        <a href="{{ url('cart') }}" ><i class="ti-bag"></i></a>
                                         <!-- Cart List Area Start -->
                                         <!--<ul class="cart-list">-->
                                         <!--    <li>-->

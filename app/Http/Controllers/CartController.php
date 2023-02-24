@@ -14,7 +14,8 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('chart.index');
+        $carts = Cart::all();
+        return view('chart.index', ['carts' => $carts]);
     }
 
     /**
@@ -35,7 +36,16 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $cart = new Cart();
+            $cart->idshops = $request->input('idshop');
+            $cart->ammount = $request->input('ammount');
+            $cart->save();
+            return redirect('/');
+        }catch(\Exception $e){
+            return back()->withErrors(['message' => 'An unexpected error occurred while adding this product to the chart.']);
+        }
+        
     }
 
     /**

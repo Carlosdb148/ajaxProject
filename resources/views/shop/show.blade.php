@@ -1,7 +1,11 @@
 @extends('base')
 @section('modalContent')
 
-
+@error('message')
+            <div style="width:100%; " class="mt-100">
+               <span class="alert alert-danger" style="width:300px; display:block; margin:0 auto; text-align:center">{{ $message }}</span>
+            </div>
+        @enderror
 
         <!-- <<<<<<<<<<<<<<<<<<<< Single Product Details Area Start >>>>>>>>>>>>>>>>>>>>>>>>> -->
         <section class="single_product_details_area section_padding_0_100 mt-100">
@@ -75,13 +79,14 @@
                             </div>
 
                             <!-- Add to Cart Form -->
-                            <form class="cart clearfix mb-50 d-flex" action="{{ url('chart') }}" method="post">
+                            <form class="cart clearfix mb-50 d-flex" action="{{ url('cart') }}" method="post">
                                 @csrf
                                 <div class="quantity">
                                     <!--<span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>-->
-                                    <input type="number" class="qty-text" id="name" step="1" min="1" max="12" name="ammount" value="1">
+                                    <input type="number" class="qty-text" id="qty2" step="1" min="1" max="12" name="ammount" value="1">
+                                                <input type="hidden" name="idshop" value="{{$shop->id}}"/>
                                     <!--<span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>-->
-                                    <input type="hidden" name="shop" value="{{ $shop->id }}">
+                                    
                                 </div>
                                 <button type="submit" name="addtocart" class="btn cart-submit d-block">Add to cart</button>
                             </form>
@@ -166,12 +171,11 @@
                                             <a href="#">View Full Product Details</a>
                                         </div>
                                         <!-- Add to Cart Form -->
-                                        <form class="cart" method="post">
+                                        <form class="cart"method="post">
                                             <div class="quantity">
                                                 <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-
-                                                <input type="number" class="qty-text" id="qty2" step="1" min="1" max="12" name="quantity" value="1">
-
+                                                <input type="number" class="qty-text" id="qty2" step="1" min="1" max="12" name="ammount" value="1">
+                                                
                                                 <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
                                             </div>
                                             <button type="submit" name="addtocart" value="5" class="cart-submit">Add to cart</button>

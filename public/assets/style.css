@@ -59,3 +59,7 @@
         display:none  !important;
     }
     
+    .pagination li:first-child span, .pagination li:last-child span{
+        width:100px;
+    }
+    

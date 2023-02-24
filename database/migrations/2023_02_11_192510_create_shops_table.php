@@ -15,19 +15,14 @@ return new class extends Migration
     {
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('idcart')->nullable();
             $table->string('name');
             $table->decimal('price', 8,2);
             $table->enum('category', ['men', 'women', 'child']);
             $table->string('description', 300);
             $table->binary('thumbnail');
-            $table->integer('ammount')->nullable();
             $table->timestamps();
             
-            $table->foreign('idcart')->references('id')->on('cart');
         });
-        
-        
         
         $sql = 'alter table shops change thumbnail thumbnail longblob';
         DB::statement($sql);

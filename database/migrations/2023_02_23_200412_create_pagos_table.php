@@ -13,16 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cart', function (Blueprint $table) {
+        Schema::create('pago', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('idshops')->unique();
-            $table->integer('ammount');
+            $table->string('idpago');
+            $table->string('email');
+            $table->string('idaccount');
+            $table->decimal('value', 8,2);
+            $table->string('currencycode');
             $table->timestamps();
-            
-            $table->foreign('idshops')->references('id')->on('shops');
         });
-        
-        
     }
 
     /**
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cart');
+        Schema::dropIfExists('pago');
     }
 };
